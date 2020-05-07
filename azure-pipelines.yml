@@ -43,7 +43,7 @@ jobs:
   - bash: |
       set -e
       cd ./build
-      make -j4
+      make
       cd -
     displayName: 'Build'
 
