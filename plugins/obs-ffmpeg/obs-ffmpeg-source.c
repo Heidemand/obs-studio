@@ -309,7 +309,7 @@ static void *ffpmeg_source_reconnect(void *data)
 	blog(LOG_ERROR, "MP: start reconnect thread");
 	struct ffmpeg_source *s = data;
 	if (s->media_valid) {
-		return;
+		return NULL;
 	}
 	bool active = obs_source_active(s->source);
 	if (!s->close_when_inactive || active)
@@ -335,7 +335,6 @@ static void ffmpeg_source_tick(void *data, float seconds)
 		if (pthread_create(&reconnect_thread, NULL,
 				   ffpmeg_source_reconnect, s) != 0) {
 			blog(LOG_WARNING, "MP: Could not create reconnect thread");
-			return false;
 		}
 	}
 }
